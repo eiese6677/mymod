@@ -17,7 +17,7 @@ public class MymodClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		DASH_KEY = KeyBindingHelper.registerKeyBinding(
 				new KeyBinding(
-						"key.mymod.dash",
+						"key.mymod.Grab",
 						InputUtil.Type.KEYSYM,
 						GLFW.GLFW_KEY_LEFT_SHIFT,
 						"category.mymod"

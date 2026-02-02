@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "mymod:item/test_item"
+    "model": "mymod:item/grab"
   }
 }

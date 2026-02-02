@@ -2,13 +2,11 @@ package nand.modid;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.block.BlockState;
-import net.minecraft.command.EntitySelectorReader;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.entity.LivingEntity;
@@ -19,18 +17,15 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.entity.projectile.ProjectileUtil;
+
 import java.util.Iterator;
 import java.util.List;
 
 
-public class TestItem extends Item {
+public class LightningBolt extends Item {
 
-    public TestItem(Settings settings) {
+    public LightningBolt(Settings settings) {
         super(settings);
     }
 

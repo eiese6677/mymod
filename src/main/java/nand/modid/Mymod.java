@@ -7,6 +7,7 @@ public class Mymod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		// 아이템 등록
 		ModItems.register();
 	}
 }
