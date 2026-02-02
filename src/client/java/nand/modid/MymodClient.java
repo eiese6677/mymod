@@ -27,7 +27,6 @@ public class MymodClient implements ClientModInitializer {
 		{
 			while (DASH_KEY.wasPressed()) {
 				System.out.println("Shift 한번 눌림");
-				ClientPlayNetworking.send(DashPacket.ID, PacketByteBufs.empty());
 			}
 		});
 	}
