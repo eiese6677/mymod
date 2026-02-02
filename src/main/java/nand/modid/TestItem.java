@@ -14,6 +14,11 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.entity.projectile.ProjectileUtil;
 
 public class TestItem extends Item {
 
@@ -24,9 +29,44 @@ public class TestItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (!world.isClient) {
-            user.addVelocity(0, 1.5, 0); // 위로 1.5
-            user.velocityModified = true;
-            user.sendMessage(Text.literal("테스트 아이템 사용됨!"), false);
+
+            double range = 100.0;
+
+            Vec3d start = user.getCameraPosVec(1.0f);
+            Vec3d direction = user.getRotationVec(1.0f);
+            Vec3d end = start.add(direction.multiply(range));
+
+            Box box = user.getBoundingBox()
+                    .stretch(direction.multiply(range))
+                    .expand(1.0);
+
+            EntityHitResult entityHit = ProjectileUtil.getEntityCollision(
+                    world,
+                    user,
+                    start,
+                    end,
+                    box,
+                    entity -> !entity.isSpectator() && entity.isAlive()
+            );
+
+            if (entityHit != null) {
+                var target = entityHit.getEntity();
+
+                LightningEntity lightning = new LightningEntity(
+                        EntityType.LIGHTNING_BOLT,
+                        world
+                );
+
+                lightning.setPosition(
+                        target.getX(),
+                        target.getY(),
+                        target.getZ()
+                );
+
+                world.spawnEntity(lightning);
+            } else {
+                user.sendMessage(Text.literal("대상 없음"), false);
+            }
         }
 
         return TypedActionResult.success(user.getStackInHand(hand));
