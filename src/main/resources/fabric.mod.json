@@ -17,9 +17,6 @@
 	"entrypoints": {
 		"main": [
 			"nand.modid.Mymod"
-		],
-		"client": [
-			"nand.modid.MymodClient"
 		]
 	},
 	"mixins": [

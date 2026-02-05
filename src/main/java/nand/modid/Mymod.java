@@ -1,5 +1,6 @@
 package nand.modid;
 
+import nand.modid.registry.ModItems;
 import net.fabricmc.api.ModInitializer;
 
 public class Mymod implements ModInitializer {

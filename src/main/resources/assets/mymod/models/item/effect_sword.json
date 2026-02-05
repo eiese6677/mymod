@@ -2,9 +2,9 @@
 	"format_version": "1.21.11",
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "mymod:item/grab_slime",
+		"0": "mymod:item/effect_sword_slime",
 		"1": "mymod:item/grab_wood",
-		"particle": "mymod:item/grab_slime"
+		"particle": "mymod:item/effect_sword_slime"
 	},
 	"elements": [
 		{

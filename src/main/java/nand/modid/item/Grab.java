@@ -1,5 +1,6 @@
-package nand.modid;
+package nand.modid.item;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -51,5 +53,13 @@ public class Grab extends Item {
         target.velocityModified = true;
 
         return TypedActionResult.success(user.getStackInHand(hand));
+    }
+
+    @Override
+    public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {
+        if (state.isOf(net.minecraft.block.Blocks.FIRE)) {
+            return true;
+        }
+        return false;
     }
 }

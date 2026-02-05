@@ -1,10 +1,9 @@
-package nand.modid;
+package nand.modid.item;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
-import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -25,8 +24,10 @@ import java.util.List;
 
 public class LightningBolt extends Item {
 
-    public LightningBolt(Settings settings) {
-        super(settings);
+    public LightningBolt() {
+        super(new Item.Settings()
+                .maxDamage(100) // 내구도 100
+        );
     }
 
     @Override
@@ -120,37 +121,19 @@ public class LightningBolt extends Item {
         }
 
         attacker.heal(5.0f);
+        target.setHealth(target.getHealth());
 
         return true;
     }
 
+    @Override
+    public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {
+        // FIRE만 캘 수 있음
+        return state.isOf(net.minecraft.block.Blocks.FIRE);
+    }
 
     @Override
     public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
-        if (!world.isClient && miner instanceof PlayerEntity player) {
-
-            TntEntity tnt = new TntEntity(
-                    world,
-                    pos.getX() + 0.5,
-                    pos.getY() + 1,
-                    pos.getZ() + 0.5,
-                    player
-            );
-
-            tnt.setFuse(40); // 40틱 = 2초
-            world.spawnEntity(tnt);
-            player.addStatusEffect(
-                    new StatusEffectInstance(
-                            StatusEffects.RESISTANCE,
-                            50,
-                            4,
-                            false,
-                            false,
-                            false
-                    )
-            );
-            player.sendMessage(Text.literal("💣 TNT 소환!"), false);
-        }
-        return true;
+        return false;
     }
 }
